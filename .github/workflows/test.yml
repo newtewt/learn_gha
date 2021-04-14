@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 12.x
-      run: echo.sh
+    - name: Echo!
+      run: ./echo.sh
