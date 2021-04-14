@@ -6,7 +6,7 @@ on:
     types: 
       - completed
     tags: 
-      - "v1"
+      - v2
 
 jobs:
   build:
