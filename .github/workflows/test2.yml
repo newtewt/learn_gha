@@ -2,8 +2,7 @@ name: downstream build
 
 on:
   workflow_run:
-    workflows: ["Run Tests"]
-    branches: [main]
+    workflows: ["Build cht-core and test against node versions"]
     types: 
       - completed
       - requested
