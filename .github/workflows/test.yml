@@ -1,0 +1,13 @@
+name: Build cht-core and test against node versions
+
+on: [push]
+
+
+jobs:
+  build:
+    name: Compile the app
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 12.x
+      run: echo.sh
