@@ -5,8 +5,7 @@ on:
     workflows: ["Build cht-core and test against node versions"]
     types: 
       - completed
-    tags: 
-      - v2
+
 
 jobs:
   build:
