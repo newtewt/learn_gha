@@ -6,7 +6,7 @@ on:
     types: 
       - completed
     tags: 
-      - "*-beta.*"
+      - "v1"
 
 jobs:
   build:
