@@ -6,7 +6,7 @@ on: [push]
 jobs:
   build:
     env:
-      TACO: yes
+      TACOS: yes
     name: Compile the app
     runs-on: ubuntu-18.04
     steps:
