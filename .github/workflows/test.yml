@@ -3,10 +3,11 @@ name: Build cht-core and test against node versions
 on: [push]
 
 
+env:
+  MARKET_URL: ${{ secrets.A_SECRET }}
+
 jobs:
   build:
-    env:
-      TACOS: yes
     name: Compile the app
     runs-on: ubuntu-18.04
     steps:
@@ -15,4 +16,4 @@ jobs:
       run: ./echo.sh
     - name: Echo Step 2
       run: ./echo.sh
-      if: env.TACO
+      if: env.MARKET_URL
