@@ -4,7 +4,7 @@ on: [push]
 
 
 env:
-  MARKET_URL: ${{ secrets.A_SECRET }}
+  MARKET_URL: ${{ secrets.B_SECRET }}
 
 jobs:
   build:
