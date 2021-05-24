@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     name: do something
     steps:
+      - name: Echo
       - run: |
           echo "::add-mask::${{ github.event.inputs.secret_test }}"
           echo "- in ${{ github.event.inputs.secret_test }}!"
