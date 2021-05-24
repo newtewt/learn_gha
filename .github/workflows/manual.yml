@@ -6,7 +6,7 @@ on:
         description: 'Person to greet'
         required: true
         default: 'Mona the Octocat'
-      secret_test:
+      secret:
         description: 'location'
         required: false
         default: 'The Octoverse'
@@ -23,6 +23,4 @@ jobs:
       - name: Echo
 
         run: |
-          echo "::add-mask::$MY_SECRET"
-          MY_SECRET=${{ github.event.inputs.secret_test }}
-          echo $MY_SECRET
+          echo "${{ github.event.inputs.secret }}"
