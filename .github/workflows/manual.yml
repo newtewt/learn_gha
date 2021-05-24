@@ -17,6 +17,6 @@ jobs:
     name: do something
     steps:
       - name: Echo
-      - run: |
+        run: |
           echo "::add-mask::${{ github.event.inputs.secret_test }}"
           echo "- in ${{ github.event.inputs.secret_test }}!"
