@@ -17,9 +17,9 @@ jobs:
   say_hello:
     runs-on: ubuntu-latest
     name: do something
-
+    env:
+      WEBHOOK_TOKEN: ${{ github.event.inputs.WEBHOOK_TOKEN }}
     steps:
       - name: Echo
-
         run: |
-          echo "${{ github.event.inputs.WEBHOOK_TOKEN }}"
+          echo "$WEBHOOK_TOKEN"
