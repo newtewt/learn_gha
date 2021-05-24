@@ -11,13 +11,18 @@ on:
         required: false
         default: 'The Octoverse'
 
+env:
+  MY_SECRET: ''
+
 jobs:
   say_hello:
     runs-on: ubuntu-latest
     name: do something
+
     steps:
       - name: Echo
+
         run: |
-          echo MY_NAME=${{ github.event.inputs.secret_test }}
-          echo "::add-mask::$MY_NAME"
-          echo "- in ${{ github.event.inputs.secret_test }}!"
+          echo "::add-mask::$MY_SECRET"
+          MY_SECRET=${{ github.event.inputs.secret_test }}
+          echo $MY_SECRET
