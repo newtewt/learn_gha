@@ -6,7 +6,7 @@ on:
         description: 'Person to greet'
         required: true
         default: 'Mona the Octocat'
-      password:
+      secret_test:
         description: 'location'
         required: false
         default: 'The Octoverse'
@@ -17,4 +17,4 @@ jobs:
     steps:
       - run: |
           echo "Hello ${{ github.event.inputs.name }}!"
-          echo "- in ${{ github.event.inputs.password }}!"
+          echo "- in ${{ github.event.inputs.secret_test }}!"
