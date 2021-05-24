@@ -12,7 +12,7 @@ on:
         default: 'The Octoverse'
 
 env:
-  MY_SECRET: ''
+  MY_SECRET: 'NOT_A_SECRET'
 
 jobs:
   say_hello:
