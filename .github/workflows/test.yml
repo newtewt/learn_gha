@@ -1,5 +1,4 @@
-name: Build cht-core and test against node versions
-
+name: BASE BUILDER
 on: [push]
 
 
@@ -10,9 +9,13 @@ jobs:
   build:
     name: Compile the app
     runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+        cmd: [test1, test2]
     steps:
     - uses: actions/checkout@v2
-    - name: Echo!
+    - name: Echo! ${{ matrix.node-version }}, ${{ matrix.cmd }}
       run: ./echo.sh
     - name: Echo Step 2
       run: ./echo.sh
