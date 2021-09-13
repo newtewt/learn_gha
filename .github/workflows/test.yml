@@ -21,4 +21,4 @@ jobs:
       run: ./echo.sh
       if: env.MARKET_URL
     - name: Set Tag
-      run: echo "TAG=${github.event.release.tag_name}" >> $GITHUB_ENV
+      run: echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
