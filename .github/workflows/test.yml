@@ -1,5 +1,5 @@
 name: BASE BUILDER
-on: [push]
+on: [push,pull_request]
 
 
 env:
