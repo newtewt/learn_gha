@@ -17,9 +17,13 @@ jobs:
   say_hello:
     runs-on: ubuntu-latest
     name: do something
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+        cmd: [test1, test2]
     env:
       WEBHOOK_TOKEN: ${{ github.event.inputs.WEBHOOK_TOKEN }}
     steps:
-      - name: Echo
+      - name: Echo  ${{ matrix.node-version }}, ${{ matrix.cmd }}
         run: |
-          echo "$WEBHOOK_TOKEN"
+          echo  ${{ matrix.node-version }}

@@ -1,6 +1,5 @@
-name: Build cht-core and test against node versions
-
-on: [push]
+name: BASE BUILDER
+on: [push,pull_request]
 
 
 env:
@@ -8,12 +7,20 @@ env:
 
 jobs:
   build:
-    name: Compile the app
+    name: Compile the app ${{ github.event_name }} 
     runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+        cmd: [test1, test2]
     steps:
     - uses: actions/checkout@v2
-    - name: Echo!
+    - name: Echo! ${{ matrix.node-version }}, ${{ matrix.cmd }}
       run: ./echo.sh
     - name: Echo Step 2
       run: ./echo.sh
       if: env.MARKET_URL
+    - name: Get branch name
+      uses: nelonoel/branch-name@1ea5c86cb559a8c4e623da7f188496208232e49f
+    - name: Echo branch name
+      run: echo $BRANCH_NAME
