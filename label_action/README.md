@@ -1,0 +1,1 @@
+An action to label issues based on selections from template.
