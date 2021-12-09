@@ -1,0 +1,30 @@
+name: Test Case
+description: File a new test case
+title: "[Test Case]: "
+labels: ["Test Case"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please add steps to execute specific tests. Please also add appropriate labels. 
+  - type: textarea
+    id: test-case-steps
+    attributes:
+      label:  Provide test case steps
+      description: Provide steps to test and expeected results. 
+      value: | 
+        Step 1 Navigate to website
+        Step 2 Do some clicky
+        Step 3 Do some other clicky
+        Expected Result -  Some action occured
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What platform to execute the test on.
+      multiple: true
+      options:
+        - Browser
+        - iOS
+        - Android
