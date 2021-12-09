@@ -22,14 +22,12 @@ body:
   - type: dropdown
     id: browsers
     attributes:
-      label: "What platform to execute the test on. <!-- browser_label -->"
+      label: "What platform to execute the test on."
       multiple: true
+      required: true
       options:
         - Browser
         - iOS
         - Android
-  - type: markdown
-    id: end_browser_label
-    attributes:
-      value: "     <!-- end_browser_label -->"
+
 
