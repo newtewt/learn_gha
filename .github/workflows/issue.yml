@@ -7,14 +7,19 @@ env:
   MY_SECRET: 'NOT_A_SECRET'
 
 jobs:
-  build:
-    name: Compile the app
-    runs-on: ubuntu-18.04
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
     steps:
-    - uses: actions/checkout@v2
-    - name: Echo!
-      run: ./echo.sh
-    - name: Echo Step 2
-      run: ./echo.sh
-      if: env.MARKET_URL
-
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Hello world action step
+        uses: ./label_action
+        id: hello
+        with:
+          who-to-greet: 'Mona the Octocat'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
