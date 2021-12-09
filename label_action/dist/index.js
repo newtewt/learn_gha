@@ -1,6 +1,74 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 3129:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const token = process.env.GHATOKEN
+const { Octokit } = __nccwpck_require__(3443);
+const octokit = new Octokit({ auth: token });
+
+const issue = async (issueNumber) => {
+  const issue = await octokit.rest.issues.get({
+    owner: 'newtewt',
+    repo: 'learn_gha',
+    issue_number: issueNumber,
+  });
+  
+  return issue.data
+}
+
+const labelsByPattern = (issueBody, pattern, endingPattern) => {
+  let sliced
+  if(pattern === ''){
+    return
+  }
+  const splitLines = issueBody.split("\n");
+  const beginIdx = splitLines.findIndex((line) => line.includes(pattern))
+  if (endingPattern) {
+    const endIdx = splitLines.findIndex((line) => line.includes(endingPattern))
+    sliced = splitLines.slice(beginIdx + 1, endIdx)
+    
+  } else {
+   sliced = splitLines.slice(beginIdx + 1)
+  }
+
+  const filtered = sliced.filter((line) => line !== '' && line !== '\r' )
+  return filtered.map((label) => label.trim())
+}
+
+const repoLabels = async () => {
+  const labels = await octokit.rest.issues.listLabelsForRepo({
+    owner: 'newtewt',
+    repo: 'learn_gha',
+  })
+  return labels.data.map((label) => label.name)
+}
+
+const filterLabels = (repoLabels, labelsToAdd) => {
+  return labelsToAdd.filter((label) => repoLabels.includes(label))
+}
+
+const addLabelsToIssue = (issueNumber, labels) => {
+  octokit.rest.issues.addLabels({
+    owner: 'newtewt',
+    repo: 'learn_gha',
+    issue_number: issueNumber,
+    labels: labels
+  })
+}
+
+
+module.exports = {
+  issue,
+  labelsByPattern,
+  addLabelsToIssue,
+  filterLabels,
+  repoLabels
+}
+
+/***/ }),
+
 /***/ 1995:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -2486,6 +2554,44 @@ exports.paginatingEndpoints = paginatingEndpoints;
 
 /***/ }),
 
+/***/ 5731:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+const VERSION = "1.0.4";
+
+/**
+ * @param octokit Octokit instance
+ * @param options Options passed to Octokit constructor
+ */
+
+function requestLog(octokit) {
+  octokit.hook.wrap("request", (request, options) => {
+    octokit.log.debug("request", options);
+    const start = Date.now();
+    const requestOptions = octokit.request.endpoint.parse(options);
+    const path = requestOptions.url.replace(options.baseUrl, "");
+    return request(options).then(response => {
+      octokit.log.info(`${requestOptions.method} ${path} - ${response.status} in ${Date.now() - start}ms`);
+      return response;
+    }).catch(error => {
+      octokit.log.info(`${requestOptions.method} ${path} - ${error.status} in ${Date.now() - start}ms`);
+      throw error;
+    });
+  });
+}
+requestLog.VERSION = VERSION;
+
+exports.requestLog = requestLog;
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
 /***/ 339:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -3781,6 +3887,31 @@ const request = withDefaults(endpoint.endpoint, {
 });
 
 exports.request = request;
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ 3443:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+var core = __nccwpck_require__(2483);
+var pluginRequestLog = __nccwpck_require__(5731);
+var pluginPaginateRest = __nccwpck_require__(5357);
+var pluginRestEndpointMethods = __nccwpck_require__(339);
+
+const VERSION = "18.12.0";
+
+const Octokit = core.Octokit.plugin(pluginRequestLog.requestLog, pluginRestEndpointMethods.legacyRestEndpointMethods, pluginPaginateRest.paginateRest).defaults({
+  userAgent: `octokit-rest.js/${VERSION}`
+});
+
+exports.Octokit = Octokit;
 //# sourceMappingURL=index.js.map
 
 
@@ -8444,16 +8575,20 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(5707);
 const github = __nccwpck_require__(2771);
+const labeler = __nccwpck_require__(3129)
+
+const doWork = async () => {
+  const issue = JSON.stringify(github?.context?.payload?.issue, undefined, 2)
+  const labels = labeler.labelsByPattern(issue.body, 'What platform to execute')
+  const repoLabels = await labeler.repoLabels()
+  const filteredLabels = labeler.filterLabels(repoLabels, labels)
+  labeler.addLabelsToIssue(issueNum, filteredLabels)
+  console.log(`The event payload: ${payload}`);
+}
 
 try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  doWork()
+
 } catch (error) {
   core.setFailed(error.message);
 }
