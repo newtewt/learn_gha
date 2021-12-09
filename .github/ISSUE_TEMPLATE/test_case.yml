@@ -21,10 +21,14 @@ body:
       required: true
   - type: dropdown
     id: browsers
+    validations:
+      required: true
     attributes:
-      label: What platform to execute the test on.
+      label: "What platform to execute the test on."
       multiple: true
       options:
         - Browser
         - iOS
         - Android
+
+
