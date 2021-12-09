@@ -22,7 +22,7 @@ body:
   - type: dropdown
     id: browsers
     attributes:
-      label: What platform to execute the test on. <!-- browser_label -->
+      label: "What platform to execute the test on. <!-- browser_label -->"
       multiple: true
       options:
         - Browser
@@ -31,5 +31,5 @@ body:
   - type: text
     id: end_browser_label
     attributes:
-      value: <!-- end_browser_label -->
+      value: "<!-- end_browser_label -->"
 
