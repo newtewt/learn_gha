@@ -17,6 +17,7 @@ const labelsByPattern = (issueBody, pattern, endingPattern) => {
   if(pattern === ''){
     return
   }
+  console.log(issueBody)
   const splitLines = issueBody.split("\n");
   const beginIdx = splitLines.findIndex((line) => line.includes(pattern))
   if (endingPattern) {
