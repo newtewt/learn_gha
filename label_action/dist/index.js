@@ -23,6 +23,7 @@ const labelsByPattern = (issueBody, pattern, endingPattern) => {
   if(pattern === ''){
     return
   }
+  console.log(issueBody)
   const splitLines = issueBody.split("\n");
   const beginIdx = splitLines.findIndex((line) => line.includes(pattern))
   if (endingPattern) {
@@ -8578,6 +8579,7 @@ const github = __nccwpck_require__(2771);
 const labeler = __nccwpck_require__(3129)
 
 const doWork = async () => {
+  console.log(`The event payload: ${payload}`);
   const issue = JSON.stringify(github.context.payload.issue, undefined, 2)
   const labels = labeler.labelsByPattern(issue.body, 'What platform to execute')
   const repoLabels = await labeler.repoLabels()
