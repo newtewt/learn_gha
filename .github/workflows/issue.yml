@@ -1,0 +1,20 @@
+name: On issue
+on:
+  issues:
+    types: [opened]
+
+env:
+  MY_SECRET: 'NOT_A_SECRET'
+
+jobs:
+  build:
+    name: Compile the app
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Echo!
+      run: ./echo.sh
+    - name: Echo Step 2
+      run: ./echo.sh
+      if: env.MARKET_URL
+
