@@ -31,5 +31,5 @@ body:
   - type: markdown
     id: end_browser_label
     attributes:
-      value: "<!-- end_browser_label -->"
+      value: "     <!-- end_browser_label -->"
 
