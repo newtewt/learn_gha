@@ -1,4 +1,4 @@
-const {token} = require('./token.json')
+const token = process.env.GHATOKEN
 const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit({ auth: token });
 
