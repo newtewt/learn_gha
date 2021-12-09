@@ -8578,7 +8578,7 @@ const github = __nccwpck_require__(2771);
 const labeler = __nccwpck_require__(3129)
 
 const doWork = async () => {
-  const issue = JSON.stringify(github?.context?.payload?.issue, undefined, 2)
+  const issue = JSON.stringify(github.context.payload.issue, undefined, 2)
   const labels = labeler.labelsByPattern(issue.body, 'What platform to execute')
   const repoLabels = await labeler.repoLabels()
   const filteredLabels = labeler.filterLabels(repoLabels, labels)
@@ -8588,7 +8588,6 @@ const doWork = async () => {
 
 try {
   doWork()
-
 } catch (error) {
   core.setFailed(error.message);
 }
