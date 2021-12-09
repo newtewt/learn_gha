@@ -28,7 +28,7 @@ body:
         - Browser
         - iOS
         - Android
-  - type: text
+  - type: markdown
     id: end_browser_label
     attributes:
       value: "<!-- end_browser_label -->"
