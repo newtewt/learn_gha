@@ -11,7 +11,7 @@ const doWork = async () => {
   const labels =  await labeler.labelsByPattern(github.context.payload.issue.body, 'What platform to execute')
   const repoLabels = await labeler.repoLabels()
   const filteredLabels = labeler.filterLabels(repoLabels, labels)
-  await labeler.addLabelsToIssue(github.context.payload.issue.body.number, filteredLabels)
+  await labeler.addLabelsToIssue(github.context.payload.issue.number, filteredLabels)
   
 }
 
