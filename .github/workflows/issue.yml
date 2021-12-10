@@ -4,7 +4,7 @@ on:
     types: [opened]
 
 env:
-  MY_SECRET: 'NOT_A_SECRET'
+  GHATOKEN: ${{ secrets.GHATOKEN }}
 
 jobs:
   hello_world_job:
