@@ -45,6 +45,9 @@ const filterLabels = (repoLabels, labelsToAdd) => {
 }
 
 const addLabelsToIssue = (issueNumber, labels) => {
+  console.log('add labels')
+  console.log('issueNumber' + issueNumber)
+  console.log('labels' + labels)
   octokit.rest.issues.addLabels({
     owner: 'newtewt',
     repo: 'learn_gha',

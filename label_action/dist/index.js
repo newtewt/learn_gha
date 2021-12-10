@@ -51,6 +51,9 @@ const filterLabels = (repoLabels, labelsToAdd) => {
 }
 
 const addLabelsToIssue = (issueNumber, labels) => {
+  console.log('add labels')
+  console.log('issueNumber' + issueNumber)
+  console.log('labels' + labels)
   octokit.rest.issues.addLabels({
     owner: 'newtewt',
     repo: 'learn_gha',
@@ -8587,7 +8590,7 @@ const doWork = async () => {
   const labels =  await labeler.labelsByPattern(github.context.payload.issue.body, 'What platform to execute')
   const repoLabels = await labeler.repoLabels()
   const filteredLabels = labeler.filterLabels(repoLabels, labels)
-  labeler.addLabelsToIssue(github.context.payload.issue.body.number, filteredLabels)
+  await labeler.addLabelsToIssue(github.context.payload.issue.body.number, filteredLabels)
   
 }
 
