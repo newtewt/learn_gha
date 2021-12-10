@@ -44,16 +44,17 @@ const filterLabels = (repoLabels, labelsToAdd) => {
   return labelsToAdd.filter((label) => repoLabels.includes(label))
 }
 
-const addLabelsToIssue = (issueNumber, labels) => {
+const addLabelsToIssue = async (issueNumber, labels) => {
   console.log('add labels')
   console.log('issueNumber' + issueNumber)
   console.log('labels' + labels)
-  octokit.rest.issues.addLabels({
+  const r = await octokit.rest.issues.addLabels({
     owner: 'newtewt',
     repo: 'learn_gha',
     issue_number: issueNumber,
     labels: labels
   })
+  console.log(r)
 }
 
 
