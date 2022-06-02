@@ -7,12 +7,25 @@ env:
   MY_SECRET: 'NOT_A_SECRET'
 
 jobs:
-  say_hello:
+  set_env:
+    outputs:
+      API_HOST: ${{ steps.daily.outputs.API_HOST }}
     runs-on: ubuntu-latest
-    name: do something
+    name: set env var
     env:
-      WEBHOOK_TOKEN: ${{ github.event.action }}
+      API_HOST: ${{ github.event.action }}
+    if: ${{ github.event.action }} == 'test-sanity'
+    steps:
+      - name: Echo
+        id: daily
+        run: |
+          echo "::set-output name=API_HOST::$API_HOST"
+  echo:
+    needs: [set_env]
+    runs-on: ubuntu-18.04
     steps:
       - name: Echo
         run: |
-          echo "$WEBHOOK_TOKEN"
+          echo ${{needs.set_env.outputs.API_HOST}}
+
+
