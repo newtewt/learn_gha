@@ -24,7 +24,7 @@ jobs:
   echo:
     runs-on: ubuntu-18.04
     env: 
-      API_HOST: ${${{ github.event.action.payload.environment }}:=Staging}
+      API_HOST: "${${{ github.event.action.payload.environment }}:=Staging"
     steps:
       - name: Echo
         run: |
