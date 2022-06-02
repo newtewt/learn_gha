@@ -7,26 +7,27 @@ env:
   MY_SECRET: 'NOT_A_SECRET'
 
 jobs:
-  set_env:
-    outputs:
-      API_HOST: ${{ steps.daily.outputs.API_HOST }}
-    runs-on: ubuntu-latest
-    name: set env var
-    env:
-      API_HOST: ${{ github.event.action }}
-    steps:
-      - name: Echo
-        if: github.event.action == 'test-sanity'
-        id: daily
-        run: |
-          echo ${{github.event}}
-          echo "::set-output name=API_HOST::$API_HOST"
+  # set_env:
+  #   outputs:
+  #     API_HOST: ${{ steps.daily.outputs.API_HOST }}
+  #   runs-on: ubuntu-latest
+  #   name: set env var
+  #   env:
+  #     API_HOST: ${{ github.event.action }}
+  #   steps:
+  #     - name: Echo
+  #       if: github.event.action == 'test-sanity'
+  #       id: daily
+  #       run: |
+  #         echo ${{github.event}}
+  #         echo "::set-output name=API_HOST::$API_HOST"
   echo:
-    needs: [set_env]
     runs-on: ubuntu-18.04
+    env: 
+      API_HOST: ${{ github.event.action.payload.environment:=Staging }}
     steps:
       - name: Echo
         run: |
-          echo ${{needs.set_env.outputs.API_HOST}}
+          echo $API_HOST
 
 
