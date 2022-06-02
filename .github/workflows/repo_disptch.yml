@@ -4,7 +4,7 @@ on:
     types: [test-sanity,not-sanity]
 
 env: 
-    API_HOST_PAYLOD: ${{ github.event.client_payload.environment }}
+    API_HOST: ${{ github.event.client_payload.environment }}
 
 jobs:
   # set_env:
@@ -27,7 +27,7 @@ jobs:
       - name: Echo
         run: |
           echo ${{ github.event.client_payload }}
-          API_HOST="${API_HOST_PAYLOD:=Staging}"
-          echo $API_HOST
+          # API_HOST="${API_HOST_PAYLOD:=Staging}"
+          echo host is $API_HOST value
 
 
