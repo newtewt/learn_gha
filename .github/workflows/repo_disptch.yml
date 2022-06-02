@@ -24,7 +24,7 @@ jobs:
   echo:
     runs-on: ubuntu-18.04
     env: 
-      API_HOST_PAYLOD: ${{ github.event.action.payload.environment }}
+      API_HOST_PAYLOD: ${{ github.event.action.client_payload.environment }}
     steps:
       - name: Echo
         run: |
