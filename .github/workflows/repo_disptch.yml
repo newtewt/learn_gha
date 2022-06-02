@@ -8,17 +8,18 @@ env:
 
 jobs:
   set_env:
+    if: github.event.action == 'test-sanity'
     outputs:
       API_HOST: ${{ steps.daily.outputs.API_HOST }}
     runs-on: ubuntu-latest
     name: set env var
     env:
       API_HOST: ${{ github.event.action }}
-    if: ${{ github.event.action }} == test-sanity
     steps:
       - name: Echo
         id: daily
         run: |
+          echo ${{github.event}}
           echo "::set-output name=API_HOST::$API_HOST"
   echo:
     needs: [set_env]
