@@ -3,8 +3,8 @@ on:
   repository_dispatch:
     types: [test-sanity,not-sanity]
 
-env:
-  MY_SECRET: 'NOT_A_SECRET'
+env: 
+    API_HOST_PAYLOD: ${{ github.event.client_payload.environment }}
 
 jobs:
   # set_env:
@@ -23,13 +23,12 @@ jobs:
   #         echo "::set-output name=API_HOST::$API_HOST"
   echo:
     runs-on: ubuntu-18.04
-    env: 
-      API_HOST_PAYLOD: ${{ github.event.client_payload.environment }}
     steps:
       - name: Echo
+        env:
+            API_HOST: "${API_HOST_PAYLOD:=Staging}"
         run: |
           echo ${{ github.event.client_payload }}
-          API_HOST="${API_HOST_PAYLOD:=Staging}"
           echo $API_HOST
 
 
