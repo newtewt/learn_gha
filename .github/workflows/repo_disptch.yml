@@ -1,7 +1,7 @@
 name: Repo Dispatch triggered workflow
 on:
   repository_dispatch:
-    types: [test-sanity]
+    types: [test-sanity,not-sanity]
 
 env:
   MY_SECRET: 'NOT_A_SECRET'
