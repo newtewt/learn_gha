@@ -14,7 +14,7 @@ jobs:
     name: set env var
     env:
       API_HOST: ${{ github.event.action }}
-    if: ${{ github.event.action }} == 'test-sanity'
+    if: ${{ github.event.action }} == test-sanity
     steps:
       - name: Echo
         id: daily

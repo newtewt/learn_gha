@@ -1,8 +1,10 @@
 const token = process.env.GHATOKEN
+console.log("token is " +  token)
 const { Octokit } = require("@octokit/rest");
 const octokit = new Octokit({ auth: token });
 
 const issue = async (issueNumber) => {
+  console.log(token)
   const issue = await octokit.rest.issues.get({
     owner: 'newtewt',
     repo: 'learn_gha',
@@ -33,6 +35,7 @@ const labelsByPattern = (issueBody, pattern, endingPattern) => {
 }
 
 const repoLabels = async () => {
+  console.log(token)
   const labels = await octokit.rest.issues.listLabelsForRepo({
     owner: 'newtewt',
     repo: 'learn_gha',
