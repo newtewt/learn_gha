@@ -4,7 +4,7 @@ on:
     types: [test-sanity,not-sanity]
 
 env: 
-    API_HOST: ${{ github.event.client_payload.environment }}
+    API_HOST: ${{ github.event.client_payload.api_host }}
 
 jobs:
   # set_env:
