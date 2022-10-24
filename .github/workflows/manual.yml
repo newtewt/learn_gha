@@ -9,6 +9,9 @@ on:
       WEBHOOK_TOKEN:
         description: 'Webhook token'
         required: true
+      DEPLOY_TO:
+        description: 'deployment'
+        required: true
 
 env:
   MY_SECRET: 'NOT_A_SECRET'
@@ -19,6 +22,7 @@ jobs:
     name: do something
     env:
       WEBHOOK_TOKEN: ${{ github.event.inputs.WEBHOOK_TOKEN }}
+    environment: ${{ github.event.inputs.DEPLOY_TO }}
     steps:
       - name: Echo
         run: |
