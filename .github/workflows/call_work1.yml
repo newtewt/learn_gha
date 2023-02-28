@@ -1,0 +1,31 @@
+name: Manually triggered workflow
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      WEBHOOK_TOKEN:
+        description: 'Webhook token'
+        required: true
+      DEPLOY_TO:
+        description: 'deployment'
+        required: true
+
+env:
+  MY_SECRET: 'NOT_A_SECRET'
+
+jobs:
+  call-workflow-2-in-local-repo:
+    uses: ./.github/workflows/work1.yml
+  say_hello:
+    runs-on: ubuntu-latest
+    name: do something
+    env:
+      WEBHOOK_TOKEN: ${{ github.event.inputs.WEBHOOK_TOKEN }}
+    environment: ${{ github.event.inputs.DEPLOY_TO }}
+    steps:
+      - name: Echo
+        run: |
+          echo "$WEBHOOK_TOKEN"
