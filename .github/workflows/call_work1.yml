@@ -8,6 +8,8 @@ env:
 jobs:
   call-workflow-2-in-local-repo:
     uses: ./.github/workflows/work1.yml
+    with:
+      config-path: .github/labeler.yml
   say_hello:
     runs-on: ubuntu-latest
     name: do something
