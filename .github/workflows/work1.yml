@@ -8,9 +8,9 @@ on:
         type: string
 
 jobs:
-  triage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Echo
-        run: |
-          echo ${{ inputs.config-path }}
+    triage:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Echo
+          run: |
+           echo ${{ inputs.config-path }}
