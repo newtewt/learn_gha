@@ -6,9 +6,6 @@ on:
       config-path:
         required: true
         type: string
-    secrets:
-      token:
-        required: true
 
 jobs:
   triage:
@@ -16,5 +13,4 @@ jobs:
     steps:
     - uses: actions/labeler@v4
       with:
-        repo-token: ${{ secrets.token }}
         configuration-path: ${{ inputs.config-path }}
