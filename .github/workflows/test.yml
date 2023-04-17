@@ -1,19 +1,19 @@
-name: Build cht-core and test against node versions
-
-on: [push]
-
-
-env:
-  MARKET_URL: ${{ secrets.B_SECRET }}
-
-jobs:
-  build:
-    name: Compile the app
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Echo!
-      run: ./echo.sh
-    - name: Echo Step 2
-      run: ./echo.sh
-      if: env.MARKET_URL
+#name: Build cht-core and test against node versions
+#
+#on: [push]
+#
+#
+#env:
+#  MARKET_URL: ${{ secrets.B_SECRET }}
+#
+#jobs:
+#  build:
+#    name: Compile the app
+#    runs-on: ubuntu-18.04
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Echo!
+#      run: ./echo.sh
+#    - name: Echo Step 2
+#      run: ./echo.sh
+#      if: env.MARKET_URL
