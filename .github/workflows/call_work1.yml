@@ -18,14 +18,14 @@ jobs:
     needs: [ set-env ]
     steps:
       - name: echo output
-        run: echo ${{ needs.set-env.outputs.test_var }}
+        run: echo ${{ needs.set-env.outputs.output1 }}
 
   call-workflow-2-in-local-repo:
     needs: [set-env]
     uses: ./.github/workflows/work1.yml
     with:
       config-path: .github/labeler.yml
-      version: ${{needs.set-env.outputs.test_var}}
+      version: ${{needs.set-env.outputs.output1}}
   say_hello:
     runs-on: ubuntu-latest
     name: do something
