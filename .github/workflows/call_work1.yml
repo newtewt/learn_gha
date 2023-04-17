@@ -1,4 +1,4 @@
-name: Manually triggered workflow
+name: Call workflow dispatch
 on:
   push:
 
@@ -10,7 +10,7 @@ jobs:
     uses: ./.github/workflows/work1.yml
     with:
       config-path: .github/labeler.yml
-      version: $MY_SECRET
+      version: ${{env.MY_SECRET}}
   say_hello:
     runs-on: ubuntu-latest
     name: do something
