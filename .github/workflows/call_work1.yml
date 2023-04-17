@@ -10,6 +10,7 @@ jobs:
     uses: ./.github/workflows/work1.yml
     with:
       config-path: .github/labeler.yml
+      version: $MY_SECRET
   say_hello:
     runs-on: ubuntu-latest
     name: do something
