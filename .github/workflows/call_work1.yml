@@ -14,6 +14,7 @@ jobs:
     - id: save_output
       run: echo "test_var=$MY_SECRET" >> $GITHUB_OUTPUT
   call-workflow-2-in-local-repo:
+    needs: [set-env]
     uses: ./.github/workflows/work1.yml
     with:
       config-path: .github/labeler.yml
