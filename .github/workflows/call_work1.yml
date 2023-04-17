@@ -6,11 +6,18 @@ env:
   MY_SECRET: 'NOT_A_SECRET'
 
 jobs:
+  set-env:
+    runs-on: ubuntu-latest
+    outputs:
+        output1: ${{ steps.save_output.outputs.test_var }}
+    steps:
+    - id: save_output
+      run: echo "test_var=$MY_SECRET" >> $GITHUB_OUTPUT
   call-workflow-2-in-local-repo:
     uses: ./.github/workflows/work1.yml
     with:
       config-path: .github/labeler.yml
-      version: ${{MY_SECRET}}
+      version: ${{needs.set-env.outputs.test_var}}
   say_hello:
     runs-on: ubuntu-latest
     name: do something
