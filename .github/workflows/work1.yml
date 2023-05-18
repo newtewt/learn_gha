@@ -9,6 +9,9 @@ on:
       version:
         required: false
         type: string
+    secrets:
+      a_token:
+        required: true
 
 jobs:
     triage:
@@ -17,4 +20,4 @@ jobs:
         - name: Echo
           run: |
            echo ${{ inputs.config-path }} 
-            echo version: ${{ inputs.version }}
+           echo version: ${{ inputs.version }}

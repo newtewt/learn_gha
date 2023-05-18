@@ -22,10 +22,19 @@ jobs:
 
   call-workflow-2-in-local-repo:
     needs: [set-env]
-    uses: ./.github/workflows/work1.yml
-    with:
-      config-path: .github/labeler.yml
-      version: ${{needs.set-env.outputs.output1}}
+    steps:
+      - name: Set Env Var
+        run: |
+          export VERSION=TACO_BELL
+          echo "NABOO_VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: echo output
+        run: echo ${{ needs.set-env.outputs.output1 }}
+      - name: Run Tests
+        uses: ./.github/workflows/work1.yml
+        secrets: inherit
+        with:
+          config-path:  ${{ env.NABOO_VERSION }}
+          version: ${{needs.set-env.outputs.output1}}
   say_hello:
     runs-on: ubuntu-latest
     name: do something
