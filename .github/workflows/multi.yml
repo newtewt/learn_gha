@@ -22,6 +22,8 @@ jobs:
   echo_token:
     needs: [set_env_var]
     runs-on: ubuntu-latest
+    env:
+      NABOO_TOKEN: ${{ env.NABOO_TOKEN}}
     steps:
       - name: echo!
         run: echo $NABOO_TOKEN
