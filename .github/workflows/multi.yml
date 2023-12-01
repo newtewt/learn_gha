@@ -10,13 +10,13 @@ jobs:
     name: set env var
     steps:
       - name: set the var
-      run: |
-        if [[ "${{ env.APP_ENV }}" == "Staging" ]]
-        then
-          echo "NABOO_TOKEN=${{ secrets.NABOO_TOKEN }}" >> $GITHUB_ENV
-        else
-          echo "NABOO_TOKEN=${{ secrets.NABOO_ACCESS_TOKEN_QA_SDK_PROD }}" >> $GITHUB_ENV
-        fi
+        run: |
+          if [[ "${{ env.APP_ENV }}" == "Staging" ]]
+          then
+            echo "NABOO_TOKEN=${{ secrets.NABOO_TOKEN }}" >> $GITHUB_ENV
+          else
+            echo "NABOO_TOKEN=${{ secrets.NABOO_ACCESS_TOKEN_QA_SDK_PROD }}" >> $GITHUB_ENV
+          fi
   echo_token:
     runs-on: ubuntu-latest
     steps:
