@@ -1,0 +1,20 @@
+name: Env Vars multi job
+on:
+  push:
+env:
+  env: 'staging'
+
+jobs:
+  set_env_var:
+    runs-on: ubuntu-latest
+    name: set env var
+    run: |
+      if [[ "${{ env.APP_ENV }}" == "Staging" ]]
+      then
+        echo "NABOO_TOKEN=${{ secrets.NABOO_TOKEN }}" >> $GITHUB_ENV
+      else
+        echo "NABOO_TOKEN=${{ secrets.NABOO_ACCESS_TOKEN_QA_SDK_PROD }}" >> $GITHUB_ENV
+      fi
+  echo_token:
+    runs-on: ubuntu-latest
+    run: echo $NABOO_TOKEN
