@@ -17,6 +17,8 @@ jobs:
           else
             echo "NABOO_TOKEN=PROD_TOKEN" >> $GITHUB_ENV
           fi
+      - name: echo
+        run: echo $NABOO_TOKEN
   echo_token:
     needs: [set_env_var]
     runs-on: ubuntu-latest
