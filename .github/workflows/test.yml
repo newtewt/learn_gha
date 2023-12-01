@@ -1,6 +1,6 @@
 name: Build cht-core and test against node versions
 
-on: [push]
+# on: [push]
 
 
 env:
