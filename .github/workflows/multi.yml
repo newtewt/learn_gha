@@ -13,9 +13,9 @@ jobs:
         run: |
           if [[ "${{ env.APP_ENV }}" == "Staging" ]]
           then
-            echo "NABOO_TOKEN=${{ secrets.NABOO_TOKEN }}" >> $GITHUB_ENV
+            echo "NABOO_TOKEN=STAGE_TOKEN" >> $GITHUB_ENV
           else
-            echo "NABOO_TOKEN=${{ secrets.NABOO_ACCESS_TOKEN_QA_SDK_PROD }}" >> $GITHUB_ENV
+            echo "NABOO_TOKEN=PROD_TOKEN" >> $GITHUB_ENV
           fi
   echo_token:
     needs: [set_env_var]
