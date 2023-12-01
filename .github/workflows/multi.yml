@@ -23,7 +23,7 @@ jobs:
     needs: [set_env_var]
     runs-on: ubuntu-latest
     steps:
-      env:
-        NABOO_TOKEN: ${{ env.NABOO_TOKEN }}
       - name: echo!
+        env:
+          NABOO_TOKEN: ${{ env.NABOO_TOKEN }}
         run: echo $NABOO_TOKEN
