@@ -18,6 +18,7 @@ jobs:
             echo "NABOO_TOKEN=${{ secrets.NABOO_ACCESS_TOKEN_QA_SDK_PROD }}" >> $GITHUB_ENV
           fi
   echo_token:
+    needs: [set_env_var]
     runs-on: ubuntu-latest
     steps:
       - name: echo!
